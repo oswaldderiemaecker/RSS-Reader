@@ -35,3 +35,6 @@ Enfin, le site Web peut être lancé de la façon suivante :
 
 Suite à des problèmes d'installation de certains composant avec composer, le site Web
 est très basique et ne permet que de consulter les flux et les articles enregistrés.
+
+L'ensemble des tests effectués est disponible dans le dossier tests.
+
