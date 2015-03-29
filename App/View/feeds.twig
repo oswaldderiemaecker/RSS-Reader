@@ -1,0 +1,22 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <table>
+        {% for feed in feeds %}
+            <tr>
+                <td>
+                    {% if feed.type == 0 %}ATOM
+                    {% else %}RSS{% endif %}
+                </td>
+                <td>&nbsp</td>
+                <td>{{ feed.date|date('Y-m-d H:i') }}</td>
+                <td>&nbsp</td>
+                <td>
+                    <a href="{{ feed.link }}">{{ feed.title }}</a>
+                </td>
+                <td>&nbsp</td>
+                <td>{{ feed.description }}</td>
+            </tr>
+        {%  endfor %}
+    </table>
+{% endblock %}

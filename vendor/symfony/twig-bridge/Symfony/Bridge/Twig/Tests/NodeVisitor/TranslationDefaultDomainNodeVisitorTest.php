@@ -13,9 +13,8 @@ namespace Symfony\Bridge\Twig\Tests\NodeVisitor;
 
 use Symfony\Bridge\Twig\NodeVisitor\TranslationDefaultDomainNodeVisitor;
 use Symfony\Bridge\Twig\NodeVisitor\TranslationNodeVisitor;
-use Symfony\Bridge\Twig\Tests\TestCase;
 
-class TranslationDefaultDomainNodeVisitorTest extends TestCase
+class TranslationDefaultDomainNodeVisitorTest extends \PHPUnit_Framework_TestCase
 {
     private static $message = 'message';
     private static $domain = 'domain';
@@ -78,6 +77,13 @@ class TranslationDefaultDomainNodeVisitorTest extends TestCase
             array(TwigNodeProvider::getTransFilter(self::$message)),
             array(TwigNodeProvider::getTransChoiceFilter(self::$message)),
             array(TwigNodeProvider::getTransTag(self::$message)),
+            // with named arguments
+            array(TwigNodeProvider::getTransFilter(self::$message, null, array(
+                'arguments' => new \Twig_Node_Expression_Array(array(), 0),
+            ))),
+            array(TwigNodeProvider::getTransChoiceFilter(self::$message), null, array(
+                'arguments' => new \Twig_Node_Expression_Array(array(), 0),
+            )),
         );
     }
 }
