@@ -1,0 +1,37 @@
+-------------------------------------------------------------------------------
+                             Compte-rendu du projet PHP
+                                 Corentin CHEMINAUD
+-------------------------------------------------------------------------------
+
+Le projet se divise en deux parties :
+- une partie 'worker' qui se connecte aux différents flux et récupère les items
+- une seconde partie qui permet à l'utilisateur de lire les différents flux
+
+Le dossier App contient l'arborescence suivante :
+App
+  |- Controller   : Le controleur de l'application Web
+  |- Model        : Le modèle
+        |- DAO    : Les classes permettant l'accès à la base de données
+        |- Entity : Les entités
+        |- PDO    : La connexion à la base de donnée via PDO
+  |- View         : La vue
+  |- Worker       : Le controleur du 'worker'
+
+La base de données utilisée est SQLite en version 3.
+Le fichier est situé dans /db/db.sqlite3 et le fichier init.sql permet de l'initialiser.
+La commande suivante permet d'initialiser la base de données :
+
+    sqlite3 db.sqlite3 < init.sql
+
+Le 'worker' peut être lancé ainsi :
+
+    php App/Worker/worker.php check
+
+La mise à jour des flux se fait toute les 10 secondes.
+
+Enfin, le site Web peut être lancé de la façon suivante :
+
+    php -S localhost:8090 -t "/mnt/data/Documents/ISIMA/zz3/PHP/RSS Reader/public"
+
+Suite à des problèmes d'installation de certains composant avec composer, le site Web
+est très basique et ne permet que de consulter les flux et les articles enregistrés.

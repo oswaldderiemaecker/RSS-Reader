@@ -20,4 +20,10 @@ CREATE TABLE items(
 );
 
 INSERT INTO feeds(title, link, description, date, type)
-VALUES ('Korben', 'http://korben.info/feed', 'Flux Korben', '2015-01-01 22:05', 0);
+VALUES ('Korben', 'http://korben.info/feed', 'Flux du site Korben', '2015-01-01 22:05', 0);
+
+INSERT INTO feeds(title, link, description, date, type)
+VALUES ('ZD Net', 'http://www.zdnet.fr/feeds/rss/', 'Flux du site ZD Net', '2015-01-01 22:05', 0);
+
+INSERT INTO feeds(title, link, description, date, type)
+VALUES ('Developpez.com', 'http://www.developpez.com/index/atom/', 'Flux du site Developpez.com', '2015-01-01 22:05', 0);
