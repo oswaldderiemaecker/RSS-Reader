@@ -1,0 +1,17 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <table>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.date|date('Y-m-d H:i')  }}</td>
+            <td>&nbsp</td>
+            <td>
+                <a href="{{ item.link }}">{{ item.title }}</a>
+            </td>
+            <td>&nbsp</td>
+            <td>{{ item.feed.title }}</td>
+        </tr>
+        {%  endfor %}
+    </table>
+{% endblock %}
