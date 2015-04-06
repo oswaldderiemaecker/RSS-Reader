@@ -1,9 +1,0 @@
-{% extends "layout.twig" %}
-
-{% block content %}
-    <form action="{{ path('/addFeed') }}" method="post">
-        {{ form(form) }}
-
-        <input type="submit" />
-    </form>
-{% endblock %}
