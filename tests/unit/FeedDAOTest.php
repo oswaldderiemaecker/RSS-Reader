@@ -18,7 +18,7 @@ class FeedDAOTest extends PHPUnit_Framework_TestCase {
         self::$con->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        self::$con->exec(file_get_contents(__DIR__ . '/../../db/init.sql'));
+        self::$con->exec(file_get_contents(__DIR__ . '/../../db/init_test.sql'));
     }
 
     public static function tearDownAfterClass() {
@@ -69,7 +69,7 @@ class FeedDAOTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($feed1->getTitle(), $feed2->getTitle());
         $this->assertEquals($feed1->getLink(), $feed2->getLink());
         $this->assertEquals($feed1->getDescription(), $feed2->getDescription());
-        $this->assertEquals($feed1->getDate()->format('Y-m-d H:i:s'), $feed2->getDate()->format('Y-m-d H:i:s'));
+        $this->assertEquals($feed1->getDate()->format('Y-m-d H:i'), $feed2->getDate()->format('Y-m-d H:i'));
         $this->assertEquals($feed1->getType(), $feed2->getType());
     }
 

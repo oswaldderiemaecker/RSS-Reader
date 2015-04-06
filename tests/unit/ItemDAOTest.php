@@ -24,7 +24,7 @@ class ItemDAOTest extends PHPUnit_Framework_TestCase {
         self::$con->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        self::$con->exec(file_get_contents(__DIR__ . '/../../db/init.sql'));
+        self::$con->exec(file_get_contents(__DIR__ . '/../../db/init_test.sql'));
 
         self::$feed = new Feed("Feed", "Link", "Description du feed", new DateTime(), FeedType::RssFeed);
 
@@ -45,7 +45,7 @@ class ItemDAOTest extends PHPUnit_Framework_TestCase {
 
     public function testInsertItem() {
         $itemMapper = new ItemMapper(self::$con);
-        $item = new Item(self::$feed, "Item", "Lien item", "Source item", date('Y-m-d H:i:s'), "Contenu lien");
+        $item = new Item(self::$feed, "Item", "Lien item", "Source item", new DateTime(), "Contenu lien");
 
         $itemMapper->insert($item);
 
@@ -57,8 +57,8 @@ class ItemDAOTest extends PHPUnit_Framework_TestCase {
 
     public function testFindAllItems() {
         $itemMapper = new ItemMapper(self::$con);
-        $item1 = new Item(self::$feed, "Item 1", "Lien item 1", "Source item 1", date('Y-m-d H:i:s'), "Contenu lien 1");
-        $item2 = new Item(self::$feed, "Item 2", "Lien item 2", "Source item 2", date('Y-m-d H:i:s'), "Contenu lien 2");
+        $item1 = new Item(self::$feed, "Item 1", "Lien item 1", "Source item 1", new DateTime(), "Contenu lien 1");
+        $item2 = new Item(self::$feed, "Item 2", "Lien item 2", "Source item 2", new DateTime(), "Contenu lien 2");
 
         $itemMapper->insert($item1);
         $itemMapper->insert($item2);
@@ -69,9 +69,9 @@ class ItemDAOTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(2, count($array));
     }
 
-    public function testFindFeed() {
+    public function testFindItem() {
         $itemMapper = new ItemMapper(self::$con);
-        $item1 = new Item(self::$feed, "Item", "Lien item", "Source item", date('Y-m-d H:i:s'), "Contenu lien");
+        $item1 = new Item(self::$feed, "Item", "Lien item", "Source item", new DateTime(), "Contenu lien");
 
         $itemMapper->insert($item1);
 
@@ -82,12 +82,12 @@ class ItemDAOTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($item1->getTitle(), $item2->getTitle());
         $this->assertEquals($item1->getLink(), $item2->getLink());
         $this->assertEquals($item1->getDescription(), $item2->getDescription());
-        $this->assertEquals($item1->getDate(), $item2->getDate());
+        $this->assertEquals($item1->getDate()->format('Y-m-d H:i'), $item2->getDate()->format('Y-m-d H:i'));
     }
 
     public function testUpdateItem() {
         $itemMapper = new ItemMapper(self::$con);
-        $item = new Item(self::$feed, "Item", "Lien item", "Source item", date('Y-m-d H:i:s'), "Contenu lien");
+        $item = new Item(self::$feed, "Item", "Lien item", "Source item", new DateTime(), "Contenu lien");
         $newLink = "Un autre lien";
 
         $itemMapper->insert($item);
@@ -103,8 +103,8 @@ class ItemDAOTest extends PHPUnit_Framework_TestCase {
 
     public function testDeleteItem() {
         $itemMapper = new ItemMapper(self::$con);
-        $item1 = new Item(self::$feed, "Item 1", "Lien item 1", "Source item 1", date('Y-m-d H:i:s'), "Contenu lien 1");
-        $item2 = new Item(self::$feed, "Item 2", "Lien item 2", "Source item 2", date('Y-m-d H:i:s'), "Contenu lien 2");
+        $item1 = new Item(self::$feed, "Item 1", "Lien item 1", "Source item 1", new DateTime(), "Contenu lien 1");
+        $item2 = new Item(self::$feed, "Item 2", "Lien item 2", "Source item 2", new DateTime(), "Contenu lien 2");
 
         $itemMapper->insert($item1);
         $itemMapper->insert($item2);
